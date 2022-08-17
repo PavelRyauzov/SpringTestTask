@@ -8,6 +8,14 @@ public class Client {
 //    private String registrationAddress;
 //    private String contactNumber;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getFullName() {
         return fullName;
     }
