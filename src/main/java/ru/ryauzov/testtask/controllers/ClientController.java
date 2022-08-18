@@ -32,7 +32,7 @@ public class ClientController {
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView showClientById(@PathVariable int id) {
+    public ModelAndView showClientById(@PathVariable long id) {
         Client client = clientService.getById(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editClient");

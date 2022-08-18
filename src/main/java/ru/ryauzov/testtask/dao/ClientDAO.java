@@ -9,5 +9,5 @@ public interface ClientDAO {
     void create(Client client);
     void update(Client client);
     void delete(Client client);
-    Client getById(int id);
+    Client getById(long id);
 }
