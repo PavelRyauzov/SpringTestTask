@@ -4,12 +4,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.ryauzov.testtask.models.Client;
+import ru.ryauzov.testtask.models.LoanApplication;
 
 import java.util.List;
 
 @Repository
-public class ClientDAOImpl implements ClientDAO {
+public class LoanApplicationDAOImpl implements LoanApplicationDAO {
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -18,32 +18,32 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
     @Override
-    public List<Client> allClients() {
+    public List<LoanApplication> allLoanApplications() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Client").list();
+        return session.createQuery("from LoanApplication").list();
     }
 
     @Override
-    public void create(Client client) {
+    public void create(LoanApplication loanApplication) {
         Session session = sessionFactory.getCurrentSession();
-        session.persist(client);
+        session.persist(loanApplication);
     }
 
     @Override
-    public void update(Client client) {
+    public void update(LoanApplication loanApplication) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(client);
+        session.update(loanApplication);
     }
 
     @Override
-    public void delete(Client client) {
+    public void delete(LoanApplication loanApplication) {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(client);
+        session.delete(loanApplication);
     }
 
     @Override
-    public Client getById(long id) {
+    public LoanApplication getById(long id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Client.class, id);
+        return session.get(LoanApplication.class, id);
     }
 }
