@@ -1,36 +1,35 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Заявка</title>
+    <title>Подпись договора</title>
 
     <link href="<c:url value="/res/bootstrap/bootstrap.min.css"/>" rel="stylesheet">
 </head>
 <body>
-
 <div class="container py-4">
-    <header class="d-flex justify-content-center py-3">
-        <ul class="nav nav-pills">
-            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Главная</a></li>
-            <li class="nav-item"><a href="/loan-processing/step-1" class="nav-link">Оформить заявку</a></li>
-            <li class="nav-item"><a href="/clients" class="nav-link">Список клиентов</a></li>
-            <li class="nav-item"><a href="/loanApplications" class="nav-link">Список заявок</a></li>
-            <li class="nav-item"><a href="/loanAgreements" class="nav-link">Список договоров</a></li>
-        </ul>
-    </header>
+        <header class="d-flex justify-content-center py-3">
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Главная</a></li>
+                <li class="nav-item"><a href="/loan-processing/step-1" class="nav-link">Оформить заявку</a></li>
+                <li class="nav-item"><a href="/clients" class="nav-link">Список клиентов</a></li>
+                <li class="nav-item"><a href="/loanApplications" class="nav-link">Список заявок</a></li>
+                <li class="nav-item"><a href="/loanAgreements" class="nav-link">Список договоров</a></li>
+            </ul>
+        </header>
 
     <main>
 
         <div class="py-5 text-center">
-            <h2>Заявка на кредит ${loanApplication.id}</h2>
+            <h2>Кредитный договор</h2>
         </div>
 
         <div class="row g-5">
             <div class="row g-3">
                 <div class="col-12">
                     <label class="form-label">ФИО</label>
-                    <p class="form-control">${loanApplication.client.fullName}</p>
+                    <p class="form-control">авп${loanApplication.client.fullName}</p>
                 </div>
 
                 <div class="col-sm-6">
@@ -104,9 +103,26 @@
                     </div>
                 </c:if>
 
-                <c:if test="${loanApplication.loanTerm == 0}">
-                    <h4 class="mb-3" style="color: red">Кредит не одобрен</h4>
-                </c:if>
+                <hr class="my-4">
+
+                <form action="/loan-processing/step-2" method="post">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="signStatus" id="signStatus1" value="0">
+                        <label class="form-check-label" for="signStatus1">
+                            Не подписывать
+                        </label>
+                    </div>
+                    <div class="form-check ">
+                        <input class="form-check-input" type="radio" name="signStatus" id="signStatus2" value="1">
+                        <label class="form-check-label" for="signStatus2">
+                            Подписать
+                        </label>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <button class="w-100 btn btn-primary btn-lg" type="submit">Отправить договор</button>
+                </form>
             </div>
         </div>
     </main>

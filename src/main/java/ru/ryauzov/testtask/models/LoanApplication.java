@@ -9,7 +9,7 @@ public class LoanApplication {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @OneToOne
     @JoinColumn(name = "client_id")
@@ -18,11 +18,17 @@ public class LoanApplication {
     @Column(name = "desired_loan_amount")
     private int desiredLoanAmount;
 
-    public int getId() {
+    @Column(name = "loan_term")
+    private int loanTerm;
+
+    @Column(name = "approved_loan_amount")
+    private int approvedLoanAmount;
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -42,7 +48,19 @@ public class LoanApplication {
         this.desiredLoanAmount = desiredLoanAmount;
     }
 
-    //    private boolean decisionStatus;
-//    private int loanTerm;
-//    private int approvedLoanAmount;
+    public int getLoanTerm() {
+        return loanTerm;
+    }
+
+    public void setLoanTerm(int loanTerm) {
+        this.loanTerm = loanTerm;
+    }
+
+    public int getApprovedLoanAmount() {
+        return approvedLoanAmount;
+    }
+
+    public void setApprovedLoanAmount(int approvedLoanAmount) {
+        this.approvedLoanAmount = approvedLoanAmount;
+    }
 }

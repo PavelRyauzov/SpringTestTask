@@ -1,5 +1,7 @@
 package ru.ryauzov.testtask.models;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity

@@ -7,6 +7,7 @@ import ru.ryauzov.testtask.models.LoanApplication;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class LoanApplicationServiceImpl implements LoanApplicationService{
@@ -46,5 +47,30 @@ public class LoanApplicationServiceImpl implements LoanApplicationService{
     @Transactional
     public LoanApplication getById(long id) {
         return loanApplicationDAO.getById(id);
+    }
+
+    @Override
+    @Transactional
+    public void makeDecision(LoanApplication loanApplication) {
+        Random random = new Random();
+
+        if(random.nextBoolean()) {
+            int min = 30;
+            int max = 365;
+            int diff = max - min;
+            int i = random.nextInt(diff + 1);
+            i += min;
+            loanApplication.setLoanTerm(i);
+
+            min = 5000;
+            max = loanApplication.getDesiredLoanAmount();
+            diff = max - min;
+            i = random.nextInt(diff + 1);
+            i += min;
+            int amount = i;
+            loanApplication.setApprovedLoanAmount(i);
+
+            loanApplicationDAO.update(loanApplication);
+        }
     }
 }

@@ -152,7 +152,7 @@
         </div>
         <h2>Оформить заявку</h2>
         <p>Перейти к оформлению заявки на кредит</p>
-        <a href="/create" class="icon-link d-inline-flex align-items-center">
+        <a href="/loan-processing/step-1" class="icon-link d-inline-flex align-items-center">
           Перейти
           <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
         </a>
@@ -174,7 +174,7 @@
         </div>
         <h2>Список заявок</h2>
         <p>Просмотреть список всех кредитных заявок со статусом одобрения</p>
-        <a href="#" class="icon-link d-inline-flex align-items-center">
+        <a href="/loanApplications" class="icon-link d-inline-flex align-items-center">
           Перейти
           <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
         </a>
@@ -187,7 +187,7 @@
         </div>
         <h2>Список кредитных договоров</h2>
         <p>Просмотреть список всех подписанных кредитных договоров со статусом подписания</p>
-        <a href="#" class="icon-link d-inline-flex align-items-center">
+        <a href="/loanAgreements" class="icon-link d-inline-flex align-items-center">
           Перейти
           <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
         </a>

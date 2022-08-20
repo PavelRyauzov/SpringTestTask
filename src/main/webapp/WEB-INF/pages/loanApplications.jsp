@@ -2,12 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Клиенты</title>
+    <title>Заявки</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<c:url value="/res/bootstrap/bootstrap.min.css"/>" rel="stylesheet">
 </head>
 <body>
-
 <div class="container py-4">
     <header class="d-flex justify-content-center py-3">
         <ul class="nav nav-pills">
@@ -21,7 +20,7 @@
 
     <main>
         <div class="py-5 text-center">
-            <h2>Список клиентов</h2>
+            <h2>Список заявок на кредит</h2>
         </div>
 
         <div class="table-responsive">
@@ -29,23 +28,28 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">ФИО</th>
-                    <th scope="col">Паспорт</th>
-                    <th scope="col">Адрес прописки</th>
-                    <th scope="col">Контактный телефон</th>
+                    <th scope="col">Клиент</th>
+                    <th scope="col">Желаемая сумма кредита</th>
+                    <th scope="col">Статус одобрения</th>
                     <th scope="col">Действие</th>
                 </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                <c:forEach var="client" items="${clientsList}">
+                <c:forEach var="loanApplication" items="${loanApplicationsList}">
                     <tr>
-                        <th scope="row">${client.id}</th>
-                        <td>${client.fullName}</td>
-                        <td>${client.passportSerial} ${client.passportNumber}</td>
-                        <td>${client.registrationAddress}</td>
-                        <td>+7${client.contactNumber}</td>
+                        <th scope="row">${loanApplication.id}</th>
                         <td>
-                            <a href="/clients/${client.id}">Подробнее</a>
+                            <a href="/clients/${loanApplication.client.id}">
+                                ${loanApplication.client}
+                            </a>
+                        </td>
+                        <td>${loanApplication.desiredLoanAmount}</td>
+                        <td>
+                            <c:if test="${loanApplication.loanTerm != 0}">Одобрен</c:if>
+                            <c:if test="${loanApplication.loanTerm == 0}">Не одобрен</c:if>
+                        </td>
+                        <td>
+                            <a href="/loanApplications/${loanApplication.id}">Подробнее</a>
                         </td>
                     </tr>
                 </c:forEach>

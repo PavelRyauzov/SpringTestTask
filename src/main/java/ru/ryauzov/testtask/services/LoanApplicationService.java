@@ -11,4 +11,6 @@ public interface LoanApplicationService {
     void update(LoanApplication loanApplication);
     void delete(LoanApplication loanApplication);
     LoanApplication getById(long id);
+    void makeDecision(LoanApplication loanApplication);
+
 }
