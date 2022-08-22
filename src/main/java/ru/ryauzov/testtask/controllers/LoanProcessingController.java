@@ -2,6 +2,8 @@ package ru.ryauzov.testtask.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +14,8 @@ import ru.ryauzov.testtask.models.LoanApplicationForm;
 import ru.ryauzov.testtask.models.LoanContractForm;
 import ru.ryauzov.testtask.services.LoanApplicationService;
 import ru.ryauzov.testtask.services.LoanContractService;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("loan-processing")
@@ -39,8 +43,17 @@ public class LoanProcessingController {
     }
 
     @PostMapping("/step-1")
-    public ModelAndView createLoanApplication(@ModelAttribute("loanApplicationForm") LoanApplicationForm form) {
+    public ModelAndView createLoanApplication(@ModelAttribute("loanApplicationForm") @Valid LoanApplicationForm form,
+                                              BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
+        FieldError test = bindingResult.getFieldError("workPeriod");
+
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("createLoanApplicationForm");
+            modelAndView.addObject("bindingResult", bindingResult);
+            return modelAndView;
+        }
+
         currentLoanApplicationId = loanApplicationService.create(form);
         modelAndView.setViewName("redirect:/loan-processing/step-2");
         return modelAndView;

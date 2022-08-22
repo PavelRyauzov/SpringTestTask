@@ -91,45 +91,41 @@
                     <div class="row g-3">
                         <div class="col-12">
                             <label for="fullName" class="form-label">ФИО</label>
-                            <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Фамилия Имя Отчество" value="" required>
-                            <div class="invalid-feedback">
-                                error
+                            <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Фамилия Имя Отчество" value="">
+                            <div style="color: red">
+                                ${bindingResult.getFieldError('fullName').defaultMessage}
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <label for="passportSerial" class="form-label">Серия паспорта</label>
-                            <input type="text" class="form-control" id="passportSerial" name="passportSerial" placeholder="****" value="" required>
-                            <div class="invalid-feedback">
-                                error
+                            <input type="text" class="form-control" id="passportSerial" name="passportSerial" placeholder="****" value="">
+                            <div style="color: red">
+                                ${bindingResult.getFieldError('passportSerial').defaultMessage}
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <label for="passportNumber" class="form-label overflow-hidden">Номер паспорта</label>
-                            <input type="text" class="form-control" id="passportNumber" name="passportNumber" placeholder="******" value=""
-                                   required>
-                            <div class="invalid-feedback">
-                                error
+                            <input type="text" class="form-control" id="passportNumber" name="passportNumber" placeholder="******" value="">
+                            <div style="color: red">
+                                ${bindingResult.getFieldError('passportNumber').defaultMessage}
                             </div>
                         </div>
 
                         <div class="col-12">
                             <label for="maritalStatus" class="form-label">Семейное положение</label>
-                            <select class="form-select" id="maritalStatus" name="maritalStatus" required>
+                            <select class="form-select" id="maritalStatus" name="maritalStatus">
                                 <option value="1">В браке</option>
                                 <option value="0">Не в браке</option>
                             </select>
-                            <div class="invalid-feedback">
-                                error
-                            </div>
                         </div>
 
                         <div class="col-12">
                             <label for="registrationAddress" class="form-label">Адрес прописки</label>
-                            <input type="text" class="form-control" id="registrationAddress" name="registrationAddress" placeholder="Волгоградская обл., г. Волгоград, ул. Садовая, д. 5, кв. 23" required>
-                            <div class="invalid-feedback">
-                                error
+                            <input type="text" class="form-control" id="registrationAddress" name="registrationAddress" placeholder="Волгоградская обл., г. Волгоград, ул. Садовая, д. 5, кв. 23">
+                            <div style="color: red">
+                                ${bindingResult.getFieldError('registrationAddress').defaultMessage}
                             </div>
                         </div>
 
@@ -137,9 +133,9 @@
                             <label for="contactNumber" class="form-label">Контактный телефон</label>
                             <div class="input-group has-validation">
                                 <span class="input-group-text">+7</span>
-                                <input type="text" class="form-control" id="contactNumber" name="contactNumber" placeholder="**********" required>
-                                <div class="invalid-feedback">
-                                    error
+                                <input type="text" class="form-control" id="contactNumber" name="contactNumber" placeholder="**********">
+                                <div style="color: red">
+                                    ${bindingResult.getFieldError('contactNumber').defaultMessage}
                                 </div>
                             </div>
                         </div>
@@ -150,25 +146,25 @@
 
                         <div class="col-md-5">
                             <label for="companyName" class="form-label">Название организации</label>
-                            <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Организация" required>
-                            <div class="invalid-feedback">
-                                error
+                            <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Организация">
+                            <div style="color: red">
+                                ${bindingResult.getFieldError('companyName').defaultMessage}
                             </div>
                         </div>
 
                         <div class="col-md-4">
                             <label for="post" class="form-label">Должность</label>
-                            <input type="text" class="form-control" id="post" name="post" placeholder="Должность" required>
-                            <div class="invalid-feedback">
-                                error
+                            <input type="text" class="form-control" id="post" name="post" placeholder="Должность">
+                            <div style="color: red">
+                                ${bindingResult.getFieldError('post').defaultMessage}
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <label for="workPeriod" class="form-label">Период работы(месяцев)</label>
-                            <input type="text" class="form-control" id="workPeriod" name="workPeriod" placeholder="*" required>
-                            <div class="invalid-feedback">
-                                error
+                            <input type="number" class="form-control" id="workPeriod" name="workPeriod" placeholder="*" value="1">
+                            <div style="color: red">
+                                ${bindingResult.getFieldError('workPeriod').defaultMessage}
                             </div>
                         </div>
                     </div>
@@ -178,10 +174,10 @@
                     <h4 class="mb-3">Желаемая сумма кредита</h4>
 
                     <div class="col-md-5">
-                        <input type="text" class="form-control" id="desiredLoanAmount" name="desiredLoanAmount"
-                               placeholder="Сумма" required>
-                        <div class="invalid-feedback">
-                            error
+                        <input type="number" class="form-control" id="desiredLoanAmount" name="desiredLoanAmount"
+                               placeholder="Сумма" value="5000">
+                        <div style="color: red">
+                            ${bindingResult.getFieldError('desiredLoanAmount').defaultMessage}
                         </div>
                     </div>
 
