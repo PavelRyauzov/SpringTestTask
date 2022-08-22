@@ -73,7 +73,7 @@
                 <li class="nav-item"><a href="/loan-processing/step-1" class="nav-link">Оформить заявку</a></li>
                 <li class="nav-item"><a href="/clients" class="nav-link">Список клиентов</a></li>
                 <li class="nav-item"><a href="/loanApplications" class="nav-link">Список заявок</a></li>
-                <li class="nav-item"><a href="/loanAgreements" class="nav-link">Список договоров</a></li>
+                <li class="nav-item"><a href="/loanContracts" class="nav-link">Список договоров</a></li>
             </ul>
         </header>
 
@@ -172,16 +172,17 @@
                                 error
                             </div>
                         </div>
+                    </div>
 
-                        <hr class="my-4">
+                    <hr class="my-4">
 
-                        <h4 class="mb-3">Желаемая сумма кредита</h4>
+                    <h4 class="mb-3">Желаемая сумма кредита</h4>
 
-                        <div class="col-md-5">
-                            <input type="text" class="form-control" id="desiredLoanAmount" name="desiredLoanAmount" placeholder="Сумма" required>
-                            <div class="invalid-feedback">
-                                error
-                            </div>
+                    <div class="col-md-5">
+                        <input type="text" class="form-control" id="desiredLoanAmount" name="desiredLoanAmount"
+                               placeholder="Сумма" required>
+                        <div class="invalid-feedback">
+                            error
                         </div>
                     </div>
 

@@ -5,12 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
-import ru.ryauzov.testtask.models.Client;
-import ru.ryauzov.testtask.models.LoanAgreement;
-import ru.ryauzov.testtask.models.LoanApplication;
+import ru.ryauzov.testtask.entities.ClientEntity;
+import ru.ryauzov.testtask.entities.LoanApplicationEntity;
+import ru.ryauzov.testtask.entities.LoanContractEntity;
+import ru.ryauzov.testtask.services.ApprovedLoanDecisionService;
 import ru.ryauzov.testtask.services.ClientService;
-import ru.ryauzov.testtask.services.LoanAgreementService;
 import ru.ryauzov.testtask.services.LoanApplicationService;
+import ru.ryauzov.testtask.services.LoanContractService;
 
 import java.util.List;
 
@@ -18,8 +19,9 @@ import java.util.List;
 public class MainController {
     private ClientService clientService;
     private LoanApplicationService loanApplicationService;
+    private ApprovedLoanDecisionService approvedLoanDecisionService;
 
-    private LoanAgreementService loanAgreementService;
+   private LoanContractService loanContractService;
 
     @Autowired
     public void setClientService(ClientService clientService) {
@@ -32,8 +34,13 @@ public class MainController {
     }
 
     @Autowired
-    public void setLoanAgreementService(LoanAgreementService loanAgreementService) {
-        this.loanAgreementService = loanAgreementService;
+    public void setApprovedLoanDecisionService(ApprovedLoanDecisionService approvedLoanDecisionService) {
+        this.approvedLoanDecisionService = approvedLoanDecisionService;
+    }
+
+    @Autowired
+    public void setLoanContractService(LoanContractService loanContractService) {
+        this.loanContractService = loanContractService;
     }
 
     @GetMapping("/")
@@ -45,46 +52,47 @@ public class MainController {
 
     @GetMapping("/clients")
     public ModelAndView allClients() {
-        List<Client> clients = clientService.allClients();
+        List<ClientEntity> clientEntities = clientService.allClients();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("clients");
-        modelAndView.addObject("clientsList", clients);
+        modelAndView.addObject("clientsList", clientEntities);
         return modelAndView;
     }
 
     @GetMapping("/clients/{id}")
     public ModelAndView showClient(@PathVariable long id) {
-        Client client = clientService.getById(id);
+        ClientEntity clientEntity = clientService.getById(id);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("client");
-        modelAndView.addObject("client", client);
+        modelAndView.addObject("client", clientEntity);
         return modelAndView;
     }
 
     @GetMapping("/loanApplications")
     public ModelAndView allLoanApplications() {
-        List<LoanApplication> loanApplications = loanApplicationService.allLoanApplications();
+        List<LoanApplicationEntity> loanApplicationEntities = loanApplicationService.allLoanApplications();
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("loanApplications");
-        modelAndView.addObject("loanApplicationsList", loanApplications);
+        modelAndView.addObject("loanApplicationsList", loanApplicationEntities);
         return modelAndView;
     }
 
     @GetMapping("/loanApplications/{id}")
     public ModelAndView showLoanApplication(@PathVariable long id) {
-        LoanApplication loanApplication = loanApplicationService.getById(id);
+        LoanApplicationEntity loanApplicationEntity = loanApplicationService.getById(id);
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("loanApplication");
-        modelAndView.addObject("loanApplication", loanApplication);
+        modelAndView.addObject("loanApplication", loanApplicationEntity);
         return modelAndView;
     }
 
-    @GetMapping("/loanAgreements")
-    public ModelAndView allLoanAgreements() {
-        List<LoanAgreement> loanAgreements = loanAgreementService.allLoanAgreements();
+    @GetMapping("/loanContracts")
+    public ModelAndView allLoanContracts() {
+        List<LoanContractEntity> loanContracts = loanContractService.allSignedLoanContracts();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("loanAgreements");
-        modelAndView.addObject("loanAgreementsList", loanAgreements);
+        modelAndView.setViewName("loanContracts");
+        modelAndView.addObject("loanContractsList", loanContracts);
         return modelAndView;
     }
 }

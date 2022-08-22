@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.ryauzov.testtask.models.LoanApplication;
+import ru.ryauzov.testtask.entities.LoanApplicationEntity;
 
 import java.util.List;
 
@@ -18,32 +18,32 @@ public class LoanApplicationDAOImpl implements LoanApplicationDAO {
     }
 
     @Override
-    public List<LoanApplication> allLoanApplications() {
+    public List<LoanApplicationEntity> allLoanApplications() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from LoanApplication").list();
+        return session.createQuery("from LoanApplicationEntity").list();
     }
 
     @Override
-    public void create(LoanApplication loanApplication) {
+    public void create(LoanApplicationEntity loanApplicationEntity) {
         Session session = sessionFactory.getCurrentSession();
-        session.persist(loanApplication);
+        session.persist(loanApplicationEntity);
     }
 
     @Override
-    public void update(LoanApplication loanApplication) {
+    public void update(LoanApplicationEntity loanApplicationEntity) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(loanApplication);
+        session.update(loanApplicationEntity);
     }
 
     @Override
-    public void delete(LoanApplication loanApplication) {
+    public void delete(LoanApplicationEntity loanApplicationEntity) {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(loanApplication);
+        session.delete(loanApplicationEntity);
     }
 
     @Override
-    public LoanApplication getById(long id) {
+    public LoanApplicationEntity getById(long id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(LoanApplication.class, id);
+        return session.get(LoanApplicationEntity.class, id);
     }
 }

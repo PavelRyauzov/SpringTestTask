@@ -1,13 +1,13 @@
 package ru.ryauzov.testtask.services;
 
-import ru.ryauzov.testtask.models.Client;
+import ru.ryauzov.testtask.entities.ClientEntity;
 
 import java.util.List;
 
 public interface ClientService {
-    List<Client> allClients();
-    void create(Client client);
-    void update(Client client);
-    void delete(Client client);
-    Client getById(long id);
+    List<ClientEntity> allClients();
+    void create(ClientEntity clientEntity);
+    void update(ClientEntity clientEntity);
+    void delete(ClientEntity clientEntity);
+    ClientEntity getById(long id);
 }

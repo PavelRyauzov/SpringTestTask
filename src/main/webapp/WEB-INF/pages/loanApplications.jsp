@@ -14,7 +14,7 @@
             <li class="nav-item"><a href="/loan-processing/step-1" class="nav-link">Оформить заявку</a></li>
             <li class="nav-item"><a href="/clients" class="nav-link">Список клиентов</a></li>
             <li class="nav-item"><a href="/loanApplications" class="nav-link">Список заявок</a></li>
-            <li class="nav-item"><a href="/loanAgreements" class="nav-link">Список договоров</a></li>
+            <li class="nav-item"><a href="/loanContracts" class="nav-link">Список договоров</a></li>
         </ul>
     </header>
 
@@ -45,8 +45,8 @@
                         </td>
                         <td>${loanApplication.desiredLoanAmount}</td>
                         <td>
-                            <c:if test="${loanApplication.loanTerm != 0}">Одобрен</c:if>
-                            <c:if test="${loanApplication.loanTerm == 0}">Не одобрен</c:if>
+                            <c:if test="${loanApplication.approvedLoanDecision != null}">Одобрен</c:if>
+                            <c:if test="${loanApplication.approvedLoanDecision == null}">Не одобрен</c:if>
                         </td>
                         <td>
                             <a href="/loanApplications/${loanApplication.id}">Подробнее</a>

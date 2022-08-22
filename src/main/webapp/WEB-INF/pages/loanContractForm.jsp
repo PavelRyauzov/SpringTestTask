@@ -3,21 +3,21 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Подпись договора</title>
+    <title>Кредитный договор</title>
 
     <link href="<c:url value="/res/bootstrap/bootstrap.min.css"/>" rel="stylesheet">
 </head>
 <body>
 <div class="container py-4">
-        <header class="d-flex justify-content-center py-3">
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Главная</a></li>
-                <li class="nav-item"><a href="/loan-processing/step-1" class="nav-link">Оформить заявку</a></li>
-                <li class="nav-item"><a href="/clients" class="nav-link">Список клиентов</a></li>
-                <li class="nav-item"><a href="/loanApplications" class="nav-link">Список заявок</a></li>
-                <li class="nav-item"><a href="/loanAgreements" class="nav-link">Список договоров</a></li>
-            </ul>
-        </header>
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Главная</a></li>
+            <li class="nav-item"><a href="/loan-processing/step-1" class="nav-link">Оформить заявку</a></li>
+            <li class="nav-item"><a href="/clients" class="nav-link">Список клиентов</a></li>
+            <li class="nav-item"><a href="/loanApplications" class="nav-link">Список заявок</a></li>
+            <li class="nav-item"><a href="/loanContracts" class="nav-link">Список договоров</a></li>
+        </ul>
+    </header>
 
     <main>
 
@@ -89,31 +89,31 @@
 
                 <hr class="my-4">
 
-                <c:if test="${loanApplication.loanTerm != 0}">
+                <c:if test="${loanApplication.approvedLoanDecision != null}">
                     <h4 class="mb-3" style="color: green">Кредит одобрен</h4>
 
                     <div class="col-md-5">
                         <label class="form-label">Предложенный срок в днях</label>
-                        <p class="form-control">${loanApplication.loanTerm}</p>
+                        <p class="form-control">${loanApplication.approvedLoanDecision.loanMaturity}</p>
                     </div>
 
                     <div class="col-md-4">
                         <label class="form-label">Одобренная сумма кредита</label>
-                        <p class="form-control">${loanApplication.approvedLoanAmount}</p>
+                        <p class="form-control">${loanApplication.approvedLoanDecision.approvedLoanAmount}</p>
                     </div>
                 </c:if>
 
                 <hr class="my-4">
 
-                <form action="/loan-processing/step-2" method="post">
+                <form action="/loan-processing/step-3" method="post">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="signStatus" id="signStatus1" value="0">
+                        <input class="form-check-input" type="radio" name="signingStatus" id="signStatus1" value="0">
                         <label class="form-check-label" for="signStatus1">
                             Не подписывать
                         </label>
                     </div>
                     <div class="form-check ">
-                        <input class="form-check-input" type="radio" name="signStatus" id="signStatus2" value="1">
+                        <input class="form-check-input" type="radio" name="signingStatus" id="signStatus2" value="1" checked>
                         <label class="form-check-label" for="signStatus2">
                             Подписать
                         </label>

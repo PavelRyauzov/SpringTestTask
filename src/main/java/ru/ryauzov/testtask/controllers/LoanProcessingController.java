@@ -2,33 +2,24 @@ package ru.ryauzov.testtask.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ru.ryauzov.testtask.models.Client;
-import ru.ryauzov.testtask.models.LoanAgreement;
-import ru.ryauzov.testtask.models.LoanApplication;
-import ru.ryauzov.testtask.services.ClientService;
-import ru.ryauzov.testtask.services.LoanAgreementService;
+import ru.ryauzov.testtask.entities.LoanApplicationEntity;
+import ru.ryauzov.testtask.models.LoanApplicationForm;
+import ru.ryauzov.testtask.models.LoanContractForm;
 import ru.ryauzov.testtask.services.LoanApplicationService;
-
-import java.sql.Date;
+import ru.ryauzov.testtask.services.LoanContractService;
 
 @Controller
 @RequestMapping("loan-processing")
 public class LoanProcessingController {
-    private long currentLoanApplicationId;
-    private ClientService clientService;
+    private long currentLoanApplicationId = -1;
     private LoanApplicationService loanApplicationService;
-    private LoanAgreementService loanAgreementService;
 
-    @Autowired
-    public void setClientService(ClientService clientService) {
-        this.clientService = clientService;
-    }
+    private LoanContractService loanContractService;
 
     @Autowired
     public void setLoanApplicationService(LoanApplicationService loanApplicationService) {
@@ -36,8 +27,8 @@ public class LoanProcessingController {
     }
 
     @Autowired
-    public void setLoanAgreementService(LoanAgreementService loanAgreementService) {
-        this.loanAgreementService = loanAgreementService;
+    public void setLoanContractService(LoanContractService loanContractService) {
+        this.loanContractService = loanContractService;
     }
 
     @GetMapping("/step-1")
@@ -48,55 +39,50 @@ public class LoanProcessingController {
     }
 
     @PostMapping("/step-1")
-    public ModelAndView createLoanApplication(@ModelAttribute("client") Client client, @ModelAttribute("desiredLoanAmount") int desiredLoanAmount) {
+    public ModelAndView createLoanApplication(@ModelAttribute("loanApplicationForm") LoanApplicationForm form) {
         ModelAndView modelAndView = new ModelAndView();
-
-        clientService.create(client);
-        LoanApplication loanApplication = new LoanApplication();
-        loanApplication.setClient(client);
-        loanApplication.setDesiredLoanAmount(desiredLoanAmount);
-        loanApplicationService.create(loanApplication);
-        loanApplicationService.makeDecision(loanApplication);
-
-        currentLoanApplicationId = loanApplication.getId();
-
-        if (loanApplication.getLoanTerm() != 0) {
-            modelAndView.setViewName("redirect:/loan-processing/step-2");
-        } else {
-            modelAndView.setViewName("redirect:/loanApplications/" + loanApplication.getId());
-        }
-
+        currentLoanApplicationId = loanApplicationService.create(form);
+        modelAndView.setViewName("redirect:/loan-processing/step-2");
         return modelAndView;
     }
 
     @GetMapping("/step-2")
-    public ModelAndView signAgreementPage() {
+    public ModelAndView loanDecisionPage() {
         ModelAndView modelAndView = new ModelAndView();
-        if (currentLoanApplicationId == 0) {
+        LoanApplicationEntity loanApplication = loanApplicationService.getById(currentLoanApplicationId);
+
+        if (currentLoanApplicationId == -1) {
             modelAndView.setViewName("redirect:/");
         } else {
-            LoanApplication loanApplication = loanApplicationService.getById(currentLoanApplicationId);
+            loanApplicationService.makeDecision(loanApplication);
+            modelAndView.setViewName("loanDecision");
+            modelAndView.addObject("loanDecision", loanApplication.getApprovedLoanDecision());
+        }
+
+
+        return modelAndView;
+    }
+
+    @GetMapping("/step-3")
+    public ModelAndView loanContractPage() {
+        ModelAndView modelAndView = new ModelAndView();
+        LoanApplicationEntity loanApplication = loanApplicationService.getById(currentLoanApplicationId);
+
+        if (currentLoanApplicationId == -1) {
+            modelAndView.setViewName("redirect:/");
+        } else {
             modelAndView.addObject("loanApplication", loanApplication);
-            modelAndView.setViewName("signAgreementForm");
+            modelAndView.setViewName("loanContractForm");
         }
 
         return modelAndView;
     }
 
-    @PostMapping("/step-2")
-    public ModelAndView signAgreement(@ModelAttribute("signStatus") boolean signStatus) {
+    @PostMapping("/step-3")
+    public ModelAndView signContract(@ModelAttribute("loanContractForm") LoanContractForm form) {
         ModelAndView modelAndView = new ModelAndView();
-
-        LoanAgreement loanAgreement = new LoanAgreement();
-        loanAgreement.setLoanApplication(loanApplicationService.getById(currentLoanApplicationId));
-
-        if (signStatus) {
-            loanAgreement.setSigningDate(new Date(System.currentTimeMillis()));
-            loanAgreementService.create(loanAgreement);
-        }
-
+        loanContractService.sign(form, currentLoanApplicationId);
         modelAndView.setViewName("redirect:/");
-
         return modelAndView;
     }
 }

@@ -3,8 +3,7 @@ package ru.ryauzov.testtask.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.ryauzov.testtask.dao.ClientDAO;
-import ru.ryauzov.testtask.dao.ClientDAOImpl;
-import ru.ryauzov.testtask.models.Client;
+import ru.ryauzov.testtask.entities.ClientEntity;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -20,31 +19,32 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     @Transactional
-    public List<Client> allClients() {
+    public List<ClientEntity> allClients() {
         return clientDAO.allClients();
     }
 
     @Override
     @Transactional
-    public void create(Client client) {
-        clientDAO.create(client);
+    public void create(ClientEntity clientEntity) {
+
+        clientDAO.create(clientEntity);
     }
 
     @Override
     @Transactional
-    public void update(Client client) {
-        clientDAO.update(client);
+    public void update(ClientEntity clientEntity) {
+        clientDAO.update(clientEntity);
     }
 
     @Override
     @Transactional
-    public void delete(Client client) {
-        clientDAO.delete(client);
+    public void delete(ClientEntity clientEntity) {
+        clientDAO.delete(clientEntity);
     }
 
     @Override
     @Transactional
-    public Client getById(long id) {
+    public ClientEntity getById(long id) {
         return clientDAO.getById(id);
     }
 }

@@ -47,7 +47,7 @@ public class HibernateConfig {
         public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("ru.ryauzov.testtask.models");
+        sessionFactory.setPackagesToScan("ru.ryauzov.testtask.entities");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }

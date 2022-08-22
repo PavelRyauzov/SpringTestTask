@@ -14,7 +14,7 @@
             <li class="nav-item"><a href="/loan-processing/step-1" class="nav-link">Оформить заявку</a></li>
             <li class="nav-item"><a href="/clients" class="nav-link">Список клиентов</a></li>
             <li class="nav-item"><a href="/loanApplications" class="nav-link">Список заявок</a></li>
-            <li class="nav-item"><a href="/loanAgreements" class="nav-link">Список договоров</a></li>
+            <li class="nav-item"><a href="/loanContracts" class="nav-link">Список договоров</a></li>
         </ul>
     </header>
 
@@ -31,19 +31,21 @@
                 <th scope="col">Заявка</th>
                 <th scope="col">Одобренная сумма кредита</th>
                 <th scope="col">Срок оплаты</th>
+                <th scope="col">Статус подписания</th>
             </tr>
             </thead>
             <tbody class="table-group-divider">
-            <c:forEach var="loanAgreement" items="${loanAgreementsList}">
+            <c:forEach var="loanContract" items="${loanContractsList}">
                 <tr>
-                    <th scope="row">${loanAgreement.id}</th>
+                    <th scope="row">${loanContract.id}</th>
                     <td>
-                        <a href="/loanApplications/${loanAgreement.loanApplication.id}">
-                            Кредитная заявка ${loanAgreement.loanApplication.id}
+                        <a href="/loanApplications/${loanContract.loanApplicationEntity.id}">
+                            Кредитная заявка ${loanContract.loanApplicationEntity.id}
                         </a>
                     </td>
-                    <td>${loanAgreement.loanApplication.approvedLoanAmount}</td>
-                    <td>${loanAgreement.loanApplication.loanTerm}</td>
+                    <td>${loanContract.loanApplicationEntity.approvedLoanDecision.approvedLoanAmount}</td>
+                    <td>${loanContract.loanApplicationEntity.approvedLoanDecision.loanMaturity}</td>
+                    <td>${loanContract.signingStatus}</td>
                 </tr>
             </c:forEach>
             </tbody>

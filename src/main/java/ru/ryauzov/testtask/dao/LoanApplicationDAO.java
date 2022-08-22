@@ -1,14 +1,13 @@
 package ru.ryauzov.testtask.dao;
 
-import ru.ryauzov.testtask.models.Client;
-import ru.ryauzov.testtask.models.LoanApplication;
+import ru.ryauzov.testtask.entities.LoanApplicationEntity;
 
 import java.util.List;
 
 public interface LoanApplicationDAO {
-    List<LoanApplication> allLoanApplications();
-    void create(LoanApplication loanApplication);
-    void update(LoanApplication loanApplication);
-    void delete(LoanApplication loanApplication);
-    LoanApplication getById(long id);
+    List<LoanApplicationEntity> allLoanApplications();
+    void create(LoanApplicationEntity loanApplicationEntity);
+    void update(LoanApplicationEntity loanApplicationEntity);
+    void delete(LoanApplicationEntity loanApplicationEntity);
+    LoanApplicationEntity getById(long id);
 }

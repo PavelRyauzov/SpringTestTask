@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Клиент ${client.id}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="<c:url value="/res/bootstrap/bootstrap.min.css"/>" rel="stylesheet">
 </head>
@@ -15,7 +15,7 @@
             <li class="nav-item"><a href="/loan-processing/step-1" class="nav-link">Оформить заявку</a></li>
             <li class="nav-item"><a href="/clients" class="nav-link">Список клиентов</a></li>
             <li class="nav-item"><a href="/loanApplications" class="nav-link">Список заявок</a></li>
-            <li class="nav-item"><a href="/loanAgreements" class="nav-link">Список договоров</a></li>
+            <li class="nav-item"><a href="/loanContracts" class="nav-link">Список договоров</a></li>
         </ul>
     </header>
 

@@ -187,7 +187,7 @@
         </div>
         <h2>Список кредитных договоров</h2>
         <p>Просмотреть список всех подписанных кредитных договоров со статусом подписания</p>
-        <a href="/loanAgreements" class="icon-link d-inline-flex align-items-center">
+        <a href="/loanContracts" class="icon-link d-inline-flex align-items-center">
           Перейти
           <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
         </a>

@@ -1,12 +1,10 @@
-package ru.ryauzov.testtask.models;
-
-import org.hibernate.annotations.Cascade;
+package ru.ryauzov.testtask.entities;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "clients")
-public class Client {
+public class ClientEntity {
 
     @Id
     @Column(name = "id")

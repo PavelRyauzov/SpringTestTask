@@ -15,7 +15,7 @@
             <li class="nav-item"><a href="/loan-processing/step-1" class="nav-link">Оформить заявку</a></li>
             <li class="nav-item"><a href="/clients" class="nav-link">Список клиентов</a></li>
             <li class="nav-item"><a href="/loanApplications" class="nav-link">Список заявок</a></li>
-            <li class="nav-item"><a href="/loanAgreements" class="nav-link">Список договоров</a></li>
+            <li class="nav-item"><a href="/loanContracts" class="nav-link">Список договоров</a></li>
         </ul>
     </header>
 

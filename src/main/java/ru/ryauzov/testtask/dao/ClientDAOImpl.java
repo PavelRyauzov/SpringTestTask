@@ -2,9 +2,11 @@ package ru.ryauzov.testtask.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.ryauzov.testtask.models.Client;
+import ru.ryauzov.testtask.entities.ApprovedLoanDecisionEntity;
+import ru.ryauzov.testtask.entities.ClientEntity;
 
 import java.util.List;
 
@@ -18,32 +20,41 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
     @Override
-    public List<Client> allClients() {
+    public List<ClientEntity> allClients() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("from Client").list();
+        return session.createQuery("from ClientEntity").list();
     }
 
     @Override
-    public void create(Client client) {
+    public void create(ClientEntity clientEntity) {
         Session session = sessionFactory.getCurrentSession();
-        session.persist(client);
+        session.persist(clientEntity);
     }
 
     @Override
-    public void update(Client client) {
+    public void update(ClientEntity clientEntity) {
         Session session = sessionFactory.getCurrentSession();
-        session.update(client);
+        session.update(clientEntity);
     }
 
     @Override
-    public void delete(Client client) {
+    public void delete(ClientEntity clientEntity) {
         Session session = sessionFactory.getCurrentSession();
-        session.delete(client);
+        session.delete(clientEntity);
     }
 
     @Override
-    public Client getById(long id) {
+    public ClientEntity getById(long id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Client.class, id);
+        return session.get(ClientEntity.class, id);
+    }
+
+    @Override
+    public List<ClientEntity> getByPassport(String passportSerial, String passportNumber) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from ClientEntity where passportSerial = :passportSerial and passportNumber = :passportNumber");
+        query.setParameter("passportSerial", passportSerial);
+        query.setParameter("passportNumber", passportNumber);
+        return query.list();
     }
 }
