@@ -29,7 +29,7 @@
             <div class="row g-3">
                 <div class="col-12">
                     <label class="form-label">ФИО</label>
-                    <p class="form-control">авп${loanApplication.client.fullName}</p>
+                    <p class="form-control">${loanApplication.client.fullName}</p>
                 </div>
 
                 <div class="col-sm-6">

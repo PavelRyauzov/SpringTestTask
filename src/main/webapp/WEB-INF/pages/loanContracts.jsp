@@ -45,7 +45,10 @@
                     </td>
                     <td>${loanContract.loanApplicationEntity.approvedLoanDecision.approvedLoanAmount}</td>
                     <td>${loanContract.loanApplicationEntity.approvedLoanDecision.loanMaturity}</td>
-                    <td>${loanContract.signingStatus}</td>
+                    <td>
+                        <c:if test="${loanContract.loanApplicationEntity.client.maritalStatus}">Подписан</c:if>
+                        <c:if test="${!loanContract.loanApplicationEntity.client.maritalStatus}">Не подписан</c:if>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
