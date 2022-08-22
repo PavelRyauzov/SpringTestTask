@@ -24,6 +24,29 @@
             <h2>Список клиентов</h2>
         </div>
 
+        <form action="/clients" method="post" class="col-sm-6 mx-auto text-center">
+            <div class="row g-3">
+                <div class="col-md-5">
+                    <select class="form-select" id="searchType" name="searchType" required>
+                        <option value="0">По ФИО</option>
+                        <option value="1">По номеру телефона</option>
+                        <option value="2">По паспортным данным</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="searchingValue" name="searchingValue" placeholder="Поиск"
+                           value="">
+                </div>
+
+                <div class="col-md-3">
+                    <button class="w-100 btn btn-primary" type="submit">Найти</button>
+                </div>
+            </div>
+        </form>
+
+        <hr class="my-4">
+
         <div class="table-responsive">
             <table class="table text-center">
                 <thead>

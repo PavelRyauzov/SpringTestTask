@@ -57,4 +57,21 @@ public class ClientDAOImpl implements ClientDAO {
         query.setParameter("passportNumber", passportNumber);
         return query.list();
     }
+
+    @Override
+    public List<ClientEntity> getByContactNumber(String contactNumber) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from ClientEntity where contactNumber = :contactNumber");
+        query.setParameter("contactNumber", contactNumber);
+        return query.list();
+    }
+
+    @Override
+    public List<ClientEntity> getByFullName(String fullName) {
+        Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from ClientEntity where fullName = :fullName");
+        query.setParameter("fullName", fullName);
+        return query.list();
+    }
+
 }

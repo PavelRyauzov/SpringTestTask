@@ -99,8 +99,7 @@
 
                         <div class="col-sm-6">
                             <label for="passportSerial" class="form-label">Серия паспорта</label>
-                            <input type="text" class="form-control" id="passportSerial" name="passportSerial" placeholder="****" value=""
-                                   required>
+                            <input type="text" class="form-control" id="passportSerial" name="passportSerial" placeholder="****" value="" required>
                             <div class="invalid-feedback">
                                 error
                             </div>

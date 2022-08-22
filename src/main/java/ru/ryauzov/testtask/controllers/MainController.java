@@ -3,11 +3,14 @@ package ru.ryauzov.testtask.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import ru.ryauzov.testtask.entities.ClientEntity;
 import ru.ryauzov.testtask.entities.LoanApplicationEntity;
 import ru.ryauzov.testtask.entities.LoanContractEntity;
+import ru.ryauzov.testtask.models.SearchingForm;
 import ru.ryauzov.testtask.services.ApprovedLoanDecisionService;
 import ru.ryauzov.testtask.services.ClientService;
 import ru.ryauzov.testtask.services.LoanApplicationService;
@@ -19,9 +22,7 @@ import java.util.List;
 public class MainController {
     private ClientService clientService;
     private LoanApplicationService loanApplicationService;
-    private ApprovedLoanDecisionService approvedLoanDecisionService;
-
-   private LoanContractService loanContractService;
+    private LoanContractService loanContractService;
 
     @Autowired
     public void setClientService(ClientService clientService) {
@@ -31,11 +32,6 @@ public class MainController {
     @Autowired
     public void setLoanApplicationService(LoanApplicationService loanApplicationService) {
         this.loanApplicationService = loanApplicationService;
-    }
-
-    @Autowired
-    public void setApprovedLoanDecisionService(ApprovedLoanDecisionService approvedLoanDecisionService) {
-        this.approvedLoanDecisionService = approvedLoanDecisionService;
     }
 
     @Autowired
@@ -56,6 +52,14 @@ public class MainController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("clients");
         modelAndView.addObject("clientsList", clientEntities);
+        return modelAndView;
+    }
+
+    @PostMapping("/clients")
+    public ModelAndView clientFilter(@ModelAttribute SearchingForm form) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("clients");
+        modelAndView.addObject("clientsList", clientService.searchClients(form));
         return modelAndView;
     }
 

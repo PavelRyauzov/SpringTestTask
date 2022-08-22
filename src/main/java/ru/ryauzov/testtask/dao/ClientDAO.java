@@ -11,4 +11,6 @@ public interface ClientDAO {
     void delete(ClientEntity clientEntity);
     ClientEntity getById(long id);
     List<ClientEntity> getByPassport(String passportSerial, String passportNumber);
+    List<ClientEntity> getByContactNumber(String contactNumber);
+    List<ClientEntity> getByFullName(String fullName);
 }
