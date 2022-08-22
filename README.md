@@ -1,6 +1,5 @@
 # TestTask
 
-# TestTask
 
 Схема базы данных
 
